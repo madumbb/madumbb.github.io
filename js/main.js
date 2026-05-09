@@ -224,14 +224,20 @@ document.getElementById('contactForm').addEventListener('submit', e => {
   const subject = document.getElementById('subject').value || 'Portfolio Contact';
   const message = document.getElementById('message').value;
   // EDIT: replace email below with yours
-  window.location.href = `mailto:mariamercedesrelao@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+  window.location.href = `mailto:mercedesrelao09@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
 
-  // ─── Formspree alternative (uncomment + add your form ID) ───
-  // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-  //   method:'POST', headers:{'Content-Type':'application/json'},
-  //   body: JSON.stringify({ name, email, subject, message })
-  // }).then(r => { if(r.ok){ alert('Sent! I\'ll reply soon.'); e.target.reset(); } });
-});
+  /* ─── CONTACT FORM (Formspree) ─── */
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    const btn = document.querySelector('#contactForm button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.disabled = false;
+    }, 3000);
+    // Let Formspree handle the rest — NO e.preventDefault()
+  });
 
 /* ─── SMOOTH SCROLL ─── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
