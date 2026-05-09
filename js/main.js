@@ -216,28 +216,18 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-/* ─── CONTACT FORM (mailto fallback) ─── */
+/* ─── CONTACT FORM (Formspree) ─── */
 document.getElementById('contactForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const name    = document.getElementById('name').value;
-  const email   = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value || 'Portfolio Contact';
-  const message = document.getElementById('message').value;
-  // EDIT: replace email below with yours
-  window.location.href = `mailto:mercedesrelao09@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+  const btn = document.querySelector('#contactForm button[type="submit"]');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-  /* ─── CONTACT FORM (Formspree) ─── */
-  document.getElementById('contactForm').addEventListener('submit', e => {
-    const btn = document.querySelector('#contactForm button[type="submit"]');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.disabled = false;
-    }, 3000);
-    // Let Formspree handle the rest — NO e.preventDefault()
-  });
+  setTimeout(() => {
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }, 3000);
+  // Let Formspree handle it — NO e.preventDefault()
+});
 
 /* ─── SMOOTH SCROLL ─── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
